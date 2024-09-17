@@ -1,40 +1,27 @@
-numeral_input = input("Enter the roman numerals you want to convert: ")
 def roman_to_int(numeral):
+    # Dictionary for Roman numerals
+    roman_dict = {
+        'M': 1000, 'D': 500, 'C': 100, 'L': 50, 
+        'X': 10, 'V': 5, 'I': 1
+    }
+
     final_answer = 0
-    for i in numeral:
-        for i in numeral:
-            if i == "M":
-                final_answer += 1000
-            elif i == "D":
-                final_answer += 500
-            elif i == "C":
-                final_answer += 100
-            elif i == "L":
-                final_answer += 50
-            elif i == "X":
-                final_answer += 10
-            elif i == "V":
-                final_answer += 5
-            elif i == "I":
-                final_answer += 1
-    print("The roman numerals you entered translates to: " + str(final_answer) + "!")
-# roman_to_int(numeral_input)
+    
+    # Loop through the numeral
+    for i in range(len(numeral)):
+        # Check if the character is a valid Roman numeral
+        if numeral[i] not in roman_dict:
+            print(f"Invalid character '{numeral[i]}' in input. Please enter valid Roman numerals.")
+            return  # Exit the function if an invalid character is found
+        
+        # If current numeral is less than the next one, subtract it
+        if i + 1 < len(numeral) and roman_dict[numeral[i]] < roman_dict[numeral[i + 1]]:
+            final_answer -= roman_dict[numeral[i]]
+        else:
+            final_answer += roman_dict[numeral[i]]
+    
+    print(f"The Roman numeral {numeral} translates to: {final_answer}")
+
+# Taking user input
+numeral_input = input("Enter the Roman numerals you want to convert: ")
 roman_to_int(numeral_input)
-if "CM" in numeral:
-  final_answer += 900
-  numeral = numeral.replace("CM", "")
-if "CD" in numeral:
-  final_answer += 400
-  numeral = numeral.replace("CD", "")
-if "XC" in numeral:
-  final_answer += 90
-  numeral = numeral.replace("XC", "")
-if "XL" in numeral:
-  final_answer += 40
-  numeral = numeral.replace("XL", "")
-if "IX" in numeral:
-  final_answer += 9
-  numeral = numeral.replace("IX", "")
-if "IV" in numeral:
-  final_answer += 4
-  numeral = numeral.replace("IV", "")
